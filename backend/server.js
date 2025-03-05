@@ -3,10 +3,8 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import dogWalkerRoutes from './routes/dogWalkerRoutes.js'; // Correct Import
-
-
-
+import dogWalkerRoutes from './routes/dogWalkerRoutes.js'; // Existing dog walker routes
+import dogOwnerRoutes from './routes/dogOwnerRoutes.js'; // New dog owner routes
 
 dotenv.config();
 
@@ -15,18 +13,14 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
-// app.use(cors({
-//   origin: "http://localhost:5000", // Adjust if your frontend runs on a different port
-//   methods: "GET,POST,PUT,DELETE",
-//   credentials: true
-// }));
 app.use(bodyParser.json());
 
 // Routes
-app.use('/api/dogwalkers', dogWalkerRoutes); // Use Routes Properly
+app.use('/api/dogwalkers', dogWalkerRoutes); // Existing route
+app.use('/api/dogowners', dogOwnerRoutes); // New dog owner route
 
 // MongoDB Connection
-console.log(process.env.MONGO_URI)
+console.log(process.env.MONGO_URI);
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
